@@ -1,3 +1,19 @@
+---
+title: Numbers API
+language_tabs:
+  - shell: Curl
+  - java: Java
+  - csharp: 'c#'
+  - javascript--node: Node.JS
+  - php: PHP
+toc_footers: []
+includes: []
+search: true
+highlight_theme: darkula
+headingLevel: 2
+
+---
+
 <h1 id="numbers-api">Numbers API v1</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
@@ -114,7 +130,7 @@ if ($err) {
 
 `POST /Account/{AccountId}/ActiveNumbers/`
 
-Purchases a new phone number for your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month's cost of the phone number. If Twilio cannot find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452. If the number you are trying to purchase requires an identity document on file and you don't have a verified identity document associated with your account, you will receive an HTTP 400 with Twilio error code 21650. See this support article for more details.
+Purchases a new phone number for your account. If a phone number is found for your request, Sinch will add it to your account and bill you for the first month's cost of the phone number. If Sinch cannot find a phone number to match your request, you will receive an HTTP 400 with Sinch error code 21452. If the number you are trying to purchase requires an identity document on file and you don’t have a verified identity document associated with your account, you will receive an HTTP 400 with Sinch error code 21650. See this support article for more details.
 
 > Body parameter
 
@@ -524,7 +540,7 @@ if ($err) {
 
 `GET /Accounts/{AccountId}/ActiveNumbers/ActiveNumbers/PN{phoneNumber}`
 
-An ActiveNumbers instance represents a Twilio phone number purchased from Twilio, ported to Twilio, or hosted on Twilio in your account.
+An ActiveNumbers instance represents a Sinch phone number purchased from Sinch, ported to Sinch, or hosted on Sinch in your account.
 
 <h3 id="get-number-parameters">Parameters</h3>
 
@@ -1024,7 +1040,7 @@ if ($err) {
 
 `DELETE /Accounts/{AccountId}/ActiveNumbers/ActiveNumbers/PN{phoneNumber}`
 
-Release this phone number from your account. Twilio will no longer answer calls to this number, and you will stop being billed the monthly phone number fee. The phone number will eventually be recycled and potentially given to another customer, so use with care. If you make a mistake, contact us. We may be able to give you the number back.
+Release this phone number from your account. Sinch will no longer answer calls to this number, and you will stop being billed the monthly phone number fee. The phone number will eventually be recycled and potentially given to another customer, so use with care. If you make a mistake, contact us. We may be able to give you the number back.
 
 <h3 id="release-number-parameters">Parameters</h3>
 
@@ -1139,33 +1155,30 @@ You can make a request directly to AvailableNumbers instance resource and choose
 |---|---|---|---|---|
 |phone_number|query|string|false|The phone number, in [E.164](https://en.wikipedia.org/wiki/E.164) (i.e. "+1") format.|
 |type|query|string|false|The type of phone number (i.e., local, mobile, tollfree, shortcode, etc.)|
-|base_setup_price|query|string|false|Setup fee for number|
-|base_recurring_price|query|string|false|Montlhly fee for number|
-|capabilities.Voice.inbound_connectivity|query|boolean|false|Indicates whether a number has inbound voice connectivity in to Twilio|
-|capabilities.Voice.outbound_connectivity|query|boolean|false|Indicates whether a number has outbound voice connectivity out of Twilio|
+|capabilities.Voice.inbound_connectivity|query|boolean|false|Indicates whether a number has inbound voice connectivity in to Sinch|
+|capabilities.Voice.outbound_connectivity|query|boolean|false|Indicates whether a number has outbound voice connectivity out of Sinch|
 |capabilities.Voice.e911|query|boolean|false|[Emergency 911][e911] connectivity capable number|
 |capabilities.Voice.sip_trunking|query|boolean|false|Capabilities.Voice.SipTrunking|
-|capabilities.Voice.calls_per_second|query|integer(int32)|false|Integer stating how many calls can be initiated per second. Please refer to Twilio's CPS Support article for more information.|
+|capabilities.Voice.calls_per_second|query|integer(int32)|false|Integer stating how many calls can be initiated per second. Please refer to Sinch's CPS Support article for more information.|
 |capabilities.Voice.concurrent_calls_limit|query|integer(int32)|false|Integer stating how many calls can be active at one time|
 |capabilities.Voice.inbound_called_dtmf|query|boolean|false|Dual-Tone Multi Frequency with inbound called party|
 |capabilities.Voice.inbound_caller_dtmf|query|boolean|false|Dual-Tone Multi Frequency with inbound caller party|
 |capabilities.Voice.inbound_caller_id_preservation|query|string|false|Inbound voice Caller ID (+E.164 format) preservation of a number. Can be - International, Domestic, or None.|
 |capabilities.Voice.inbound_reachability|query|string|false|Inbound Voice reachability of a number. Can be - Domestic, Foreign, or Global|
-|capabilities.SMS.inbound_connectivity|query|boolean|false|Indicates whether a number has inbound sms connectivity in to Twilio|
-|capabilities.SMS.outbound_connectivity|query|boolean|false|Indicates whether a number has outbound sms connectivity out of Twilio|
+|capabilities.SMS.inbound_connectivity|query|boolean|false|Indicates whether a number has inbound sms connectivity in to Sinch|
+|capabilities.SMS.outbound_connectivity|query|boolean|false|Indicates whether a number has outbound sms connectivity out of Sinch|
 |capabilities.SMS.gsm7|query|boolean|false|GSM-7 is a character encoding standard which packs the most commonly used letters and symbols in many languages into 7 bits each for usage on GSM networks. See What is GSM-7 Character Encoding|
 |capabilities.SMS.ucs2|query|boolean|false|UCS-2 is a character encoding standard in which characters are represented by a fixed-length 16 bits (2 bytes). See What is UCS-2 Character Encoding?|
 |capabilities.SMS.gsm7_concatenation|query|boolean|false|Concatenated short message service (or concatenated SMS) is used overcome the limitation on the number of characters that can be sent in a single SMS text message transmission (which is usually 160), and split the sms into smaller messages by the sending device and recombined at the receiving end.|
 |capabilities.SMS.ucs2_concatenation|query|boolean|false|Concatenated short message service (or concatenated SMS) is used overcome the limitation on the number of characters that can be sent in a single SMS text message transmission (which is usually 160), and split the sms into smaller messages by the sending device and recombined at the receiving end.|
 |capabilities.SMS.inbound_sender_id_preservation|query|string|false|Inbound voice Sender ID (+E.164 format) preservation of a number. Can be - International, Domestic, or None|
 |capabilities.SMS.inbound_reachability|query|string|false|Inbound SMS reachability of a number. Can be - Domestic, Foreign, or Global.|
-|capabilities.SMS.inbound_mps|query|integer(int32)|false|Integer showing the SMS inbound message per second limit. Please refer to Twilio's MPS Support article for more information.|
-|capabilities.MMS.inbound_connectivity|query|boolean|false|Indicates whether a number has inbound MMS connectivity into Twilio|
-|capabilities.MMS.outbound_connectivity|query|boolean|false|Indicates whether a number has outbound MMS connectivity into Twilio|
+|capabilities.SMS.inbound_mps|query|integer(int32)|false|Integer showing the SMS inbound message per second limit. Please refer to Sinch's MPS Support article for more information.|
+|capabilities.MMS.inbound_connectivity|query|boolean|false|Indicates whether a number has inbound MMS connectivity into Sinch|
+|capabilities.MMS.outbound_connectivity|query|boolean|false|Indicates whether a number has outbound MMS connectivity into Sinch|
 |capabilities.MMS.inbound_reachability|query|string|false|Inbound MMS reachability of a number. Can be - Domestic, Foreign, or Global.|
-|capabilities.MMS.inbound_mps|query|integer(int32)|false|Integer showing the MMS inbound message per second limit. Please refer to Twilio's MPS Support article for more information.|
-|regulatory.address_requirements|query|string|false|The following are the possible values for the address_required property.
-|
+|capabilities.MMS.inbound_mps|query|integer(int32)|false|Integer showing the MMS inbound message per second limit. Please refer to Sinch's MPS Support article for more information.|
+|regulatory.address_requirements|query|string|false|The following are the possible values for the address_required property.|
 |lifecycle|query|string|false|The lifecycle the number is in (i.e., developer-preview, beta, generally-available, exhausted).|
 |geography.iso_country|query|string|false|The [ISO](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of this phone number.|
 |geography.lata|query|string|false|The [rate center](http://en.wikipedia.org/wiki/Local_access_and_transport_area) of this phone number. Only available for countries in the [North American Numbering Plan (NANPA)](https://en.wikipedia.org/wiki/North_American_Numbering_Plan).|
@@ -1287,11 +1300,11 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|url|string(hostname)\|null|false|none|The URL Twilio will request when this phone number receives a call. The VoiceURL will no longer be used if a VoiceApplicationSid or a TrunkSid is set.|
-|method|string\|null|false|none|The HTTP method Twilio will use when requesting the above Url. Either GET or POST.The URL that Twilio will request if an error occurs retrieving or executing the TwiML requested by Url.|
-|fallback_url|string(hostname)\|null|false|none|The URL that Twilio will request if an error occurs retrieving or executing the TwiML requested by Url.|
-|fallback_method|string\|null|false|none|The HTTP method Twilio will use when requesting the VoiceFallbackUrl. Either GET or POST.|
-|application_sid|string\|null|false|none|The 34 character sid of the voice application Twilio should use to handle Voice sent to this number. If an VoiceApplicationSid is present, Twilio will ignore all of the VoiceUrls above and use those set on the application.|
+|url|string(hostname)\|null|false|none|The URL Sinch will request when this phone number receives a call. The VoiceURL will no longer be used if a VoiceApplicationSid or a TrunkSid is set.|
+|method|string\|null|false|none|The HTTP method Sinch will use when requesting the above Url. Either GET or POST.The URL that Sinch will request if an error occurs retrieving or executing the TwiML requested by Url.|
+|fallback_url|string(hostname)\|null|false|none|The URL that Sinch will request if an error occurs retrieving or executing the TwiML requested by Url.|
+|fallback_method|string\|null|false|none|The HTTP method Sinch will use when requesting the VoiceFallbackUrl. Either GET or POST.|
+|application_sid|string\|null|false|none|The 34 character sid of the voice application Sinch should use to handle Voice sent to this number. If an VoiceApplicationSid is present, Sinch will ignore all of the VoiceUrls above and use those set on the application.|
 
 #### Enumerated Values
 
@@ -1319,9 +1332,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|url|string\|null|false|none|The URL Twilio will request when this phone number receives a message. The SmsUrl will no longer be used if an SmsApplicationSid is set.|
-|method|string\|null|false|none|The HTTP method Twilio will use when requesting the callbackurl. Either GET or POST.|
-|application_sid|string\|null|false|none|The 34 character sid of the voice application Twilio should use to handle Voice sent to this number. If an VoiceApplicationSid is present, Twilio will ignore all of the VoiceUrls above and use those set on the application.|
+|url|string\|null|false|none|The URL Sinch will request when this phone number receives a message. The SmsUrl will no longer be used if an SmsApplicationSid is set.|
+|method|string\|null|false|none|The HTTP method Sinch will use when requesting the callbackurl. Either GET or POST.|
+|application_sid|string\|null|false|none|The 34 character sid of the voice application Sinch should use to handle Voice sent to this number. If an VoiceApplicationSid is present, Sinch will ignore all of the VoiceUrls above and use those set on the application.|
 
 #### Enumerated Values
 
@@ -1396,11 +1409,11 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|inbound_connectivity|boolean|false|none|Indicates whether a number has inbound voice connectivity in to Twilio|
-|outbound_connectivity|boolean|false|none|Indicates whether a number has outbound voice connectivity out of Twilio|
+|inbound_connectivity|boolean|false|none|Indicates whether a number has inbound voice connectivity in to Sinch|
+|outbound_connectivity|boolean|false|none|Indicates whether a number has outbound voice connectivity out of Sinch|
 |e911|boolean|false|none|[Emergency 911][e911] connectivity capable number|
 |sip_trunking|boolean|false|none|Capabilities.Voice.SipTrunking|
-|calls_per_second|integer(int32)|false|none|Integer stating how many calls can be initiated per second. Please refer to Twilio's CPS Support article for more information.|
+|calls_per_second|integer(int32)|false|none|Integer stating how many calls can be initiated per second. Please refer to Sinch's CPS Support article for more information.|
 |concurrent_calls_limit|integer(int32)|false|none|Integer stating how many calls can be active at one time|
 |inbound_called_dtmf|boolean|false|none|Dual-Tone Multi Frequency with inbound called party|
 |inbound_caller_dtmf|boolean|false|none|Dual-Tone Multi Frequency with inbound caller party|
@@ -1432,15 +1445,15 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|inbound_connectivity|boolean|false|none|Indicates whether a number has inbound sms connectivity in to Twilio|
-|outbound_connectivity|boolean|false|none|Indicates whether a number has outbound sms connectivity out of Twilio|
+|inbound_connectivity|boolean|false|none|Indicates whether a number has inbound sms connectivity in to Sinch|
+|outbound_connectivity|boolean|false|none|Indicates whether a number has outbound sms connectivity out of Sinch|
 |gsm7|boolean|false|none|GSM-7 is a character encoding standard which packs the most commonly used letters and symbols in many languages into 7 bits each for usage on GSM networks. See What is GSM-7 Character Encoding|
 |ucs2|boolean|false|none|UCS-2 is a character encoding standard in which characters are represented by a fixed-length 16 bits (2 bytes). See What is UCS-2 Character Encoding?|
 |gsm7_concatenation|boolean|false|none|Concatenated short message service (or concatenated SMS) is used overcome the limitation on the number of characters that can be sent in a single SMS text message transmission (which is usually 160), and split the sms into smaller messages by the sending device and recombined at the receiving end.|
 |ucs2_concatenation|boolean|false|none|Concatenated short message service (or concatenated SMS) is used overcome the limitation on the number of characters that can be sent in a single SMS text message transmission (which is usually 160), and split the sms into smaller messages by the sending device and recombined at the receiving end.|
 |inbound_sender_id_preservation|string\|null|false|none|Inbound voice Sender ID (+E.164 format) preservation of a number. Can be - International, Domestic, or None|
 |inbound_reachability|string\|null|false|none|Inbound SMS reachability of a number. Can be - Domestic, Foreign, or Global.|
-|inbound_mps|integer(int32)|false|none|Integer showing the SMS inbound message per second limit. Please refer to Twilio's MPS Support article for more information.|
+|inbound_mps|integer(int32)|false|none|Integer showing the SMS inbound message per second limit. Please refer to Sinch's MPS Support article for more information.|
 
 <h2 id="tocSmmscapabilities">MmsCapabilities</h2>
 
@@ -1462,10 +1475,10 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|inbound_connectivity|boolean|false|none|Indicates whether a number has inbound MMS connectivity into Twilio|
-|outbound_connectivity|boolean|false|none|Indicates whether a number has outbound MMS connectivity into Twilio|
+|inbound_connectivity|boolean|false|none|Indicates whether a number has inbound MMS connectivity into Sinch|
+|outbound_connectivity|boolean|false|none|Indicates whether a number has outbound MMS connectivity into Sinch|
 |inbound_reachability|string\|null|false|none|Inbound MMS reachability of a number. Can be - Domestic, Foreign, or Global.|
-|inbound_mps|integer(int32)|false|none|Integer showing the MMS inbound message per second limit. Please refer to Twilio's MPS Support article for more information.|
+|inbound_mps|integer(int32)|false|none|Integer showing the MMS inbound message per second limit. Please refer to Sinch's MPS Support article for more information.|
 
 <h2 id="tocScapabilities">Capabilities</h2>
 
@@ -1653,8 +1666,8 @@ This operation does not require authentication
 |---|---|---|---|---|
 |friendlyName|string\|null|false|none|A human readable descriptive text for this resource, up to 64 characters long. By default, the FriendlyName is a nicely formatted version of the phone number.|
 |accountSid|string\|null|false|none|Accound sid the number is connected to|
-|statusCallback|string\|null|false|none|The URL that Twilio will request to pass status parameters (such as call ended) to your application.|
-|statusCallbackMethod|string\|null|false|none|The HTTP method Twilio will use to make requests to the StatusCallback URL. Either GET or POST.|
+|statusCallback|string\|null|false|none|The URL that Sinch will request to pass status parameters (such as call ended) to your application.|
+|statusCallbackMethod|string\|null|false|none|The HTTP method Sinch will use to make requests to the StatusCallback URL. Either GET or POST.|
 |configuration|[Configuration](#schemaconfiguration)\|null|false|none|none|
 |phone_number|string\|null|false|none|The phone number, in [E.164](https://en.wikipedia.org/wiki/E.164) (i.e. "+1") format.|
 |type|string\|null|false|none|The type of phone number (i.e., local, mobile, tollfree, shortcode, etc.)|
@@ -1852,7 +1865,7 @@ This operation does not require authentication
 
 ```
 
-*An ActiveNumbers instance represents a Twilio phone number purchased from Twilio, ported to Twilio, or hosted on Twilio in your account.*
+*An ActiveNumbers instance represents a Sinch phone number purchased from Sinch, ported to Sinch, or hosted on Sinch in your account.*
 
 ### Properties
 
@@ -1943,6 +1956,6 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|items|[[AvailableNumber](#schemaavailablenumber)]\|null|false|none|[An ActiveNumbers instance represents a Twilio phone number purchased from Twilio, ported to Twilio, or hosted on Twilio in your account.]|
+|items|[[AvailableNumber](#schemaavailablenumber)]\|null|false|none|[An ActiveNumbers instance represents a Sinch phone number purchased from Sinch, ported to Sinch, or hosted on Sinch in your account.]|
 |meta|[Meta](#schemameta)\|null|false|none|none|
 
